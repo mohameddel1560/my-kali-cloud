@@ -1,0 +1,33 @@
+{
+    "name": "Kali Linux Light Lab",
+    // 1. استخدمنا صورة kali مباشرة بدل ubuntu عشان نوفر وقت إضافة الـ Repositories
+    "image": "docker.io/kalilinux/kali-rolling:latest", 
+    
+    // 2. تقليل الأوامر اللي بتشتغل وقت الـ Update
+    "updateContentCommand": "sudo apt-get update",
+
+    // 3. ترتيب الأوامر وتثبيت الأدوات الأساسية فقط. 
+    // تم حذف الأدوات الضخمة جداً (مثل metasploit) لتجنب التهنيج، يمكنك تثبيتها يدوياً عند الحاجة.
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y curl wget git gnupg && sudo apt-get install -y nmap sqlmap hydra john ffuf dirb build-essential python3-pip",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ethan-id.kali-linux-vscode-theme",
+                "ms-python.python"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
+    },
+    
+    "remoteUser": "root", // Kali containers عادة بتشتغل بـ root أسرع في الصلاحيات
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:1": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true
+        }
+    }
+}
+
