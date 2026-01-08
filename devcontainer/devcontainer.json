@@ -1,29 +1,18 @@
 {
-    "name": "Kali Linux Ultimate Lab",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu", 
-    
-    "updateContentCommand": "sudo apt-get update",
-
-    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y curl wget git gnupg && curl -fssL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/kali-archive-keyring.gpg && echo 'deb http://http.kali.org/kali kali-rolling main contrib non-free non-free-firmware' | sudo tee /etc/apt/sources.list.d/kali.list && sudo apt-get update && sudo apt-get install -y nmap sqlmap exploitdb msfpc metasploit-framework hydra john burpsuite ffuf dirb wpscan set build-essential python3-pip",
-
+    "name": "Kali Linux Persistent Lab",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     "customizations": {
         "vscode": {
             "extensions": [
                 "ethan-id.kali-linux-vscode-theme",
-                "ms-python.python",
-                "golang.go"
+                "ms-python.python"
             ],
             "settings": {
-                "terminal.integrated.shell.linux": "/bin/bash"
+                "terminal.integrated.defaultProfile.linux": "bash"
             }
         }
     },
-    
-    "remoteUser": "vscode",
-    "features": {
-        "ghcr.io/devcontainers/features/common-utils:1": {
-            "installZsh": true,
-            "upgradePackages": true
-        }
-    }
+    "remoteUser": "root"
 }
